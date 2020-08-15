@@ -5,10 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Data
@@ -20,11 +17,22 @@ public class Availability {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userId;
-    private Long eventId;
+//    private Long userId;
+//    private Long eventId;
 
     private Date date;
     private int hours;
 
+    @ManyToOne
+    private AppUser appUser;
 
+    @ManyToOne
+    private Event event;
+
+    public Availability(Date date, int hours, AppUser appUser, Event event) {
+        this.date = date;
+        this.hours = hours;
+        this.appUser = appUser;
+        this.event = event;
+    }
 }

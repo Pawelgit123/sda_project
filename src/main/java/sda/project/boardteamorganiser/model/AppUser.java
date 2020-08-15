@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -25,6 +23,12 @@ public class AppUser {
     private String email;
 
     private Boolean isAcitve;
+
+    @OneToMany (mappedBy = "appUser")
+    private Set<Availability> availabilitySet;
+
+    @OneToMany(mappedBy = "appUser")
+    private Set<Event> eventSet;
 
     public AppUser(String nick, String login, String password, String email, Boolean isAcitve) {
         this.nick = nick;
