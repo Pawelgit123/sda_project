@@ -2,6 +2,7 @@ package sda.project.boardteamorganiser.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -25,9 +26,11 @@ public class AppUser {
     private Boolean isAcitve;
 
     @OneToMany (mappedBy = "appUser")
+    @EqualsAndHashCode.Exclude
     private Set<Availability> availabilitySet;
 
     @OneToMany(mappedBy = "appUser")
+    @EqualsAndHashCode.Exclude
     private Set<Event> eventSet;
 
     public AppUser(String nick, String login, String password, String email, Boolean isAcitve) {

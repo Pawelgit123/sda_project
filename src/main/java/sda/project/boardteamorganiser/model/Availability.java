@@ -1,9 +1,7 @@
 package sda.project.boardteamorganiser.model;
 
 import javafx.scene.chart.PieChart;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -24,9 +22,13 @@ public class Availability {
     private int hours;
 
     @ManyToOne
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private AppUser appUser;
 
     @ManyToOne
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Event event;
 
     public Availability(Date date, int hours, AppUser appUser, Event event) {

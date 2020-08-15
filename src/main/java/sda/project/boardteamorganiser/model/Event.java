@@ -1,8 +1,6 @@
 package sda.project.boardteamorganiser.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -22,10 +20,13 @@ public class Event {
     private EventConfirmation eventConfirmation;
     private boolean isConfirmed;
 
-    @OneToMany
+    @ManyToOne
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private AppUser appUser;
 
     @OneToMany(mappedBy = "event")
+    @EqualsAndHashCode.Exclude
     private Set<Availability> availabilitySet;
 
     private String description;
