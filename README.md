@@ -1,12 +1,12 @@
 # Board Team Organiser
 
-This application is a [...] 2-10 zdan
+This application is simple project on author's way to learn more about programming with a combination of personal hobby.  The goal is to make people organise board game events quicker and more efficient with proper amount of people and time. The main problem is always to find people with enough time on a concrete day in order to event to be organised.
 
 ## What does it do?
 This application had following functionalities:
-- 123
-- 123
-- 123
+- Creating new Events
+- Adding user's Availability for Events
+- Finalising the Events with proper user's Availability
 
 ## Prereqisities
 This project use following technologies:
@@ -18,8 +18,9 @@ You should have access to a mysqsl database. Access to the database is controlle
 
 ## What is to be done?
 Followin functionalities should be improved:
-- 123
-- 123
+- Implementing outside information from BGG site
+- Importing events from public organisers
+- simple Event chat for details
 
 
 ## How to build?
@@ -35,3 +36,4 @@ To build this application:
 `java -jar applicationname.jar`
 
 ## Authors
+- Paweł G.
