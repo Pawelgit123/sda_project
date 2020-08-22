@@ -11,8 +11,8 @@
         <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <!--powyższa linia służy do wskazania hibernate'owi sterownika bazy danych-->
 
-        <property name="connection.username">userFake</property>
-        <property name="connection.password">userFake</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">kawao7</property>
 
         <!--DB schema will be updated if needed -->
         <!--Hibernate model to data definition language-->
