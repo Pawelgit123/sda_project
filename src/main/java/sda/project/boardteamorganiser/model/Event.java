@@ -7,6 +7,7 @@ import java.util.Set;
 
 @Data
 @Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Event {
@@ -29,13 +30,14 @@ public class Event {
     @EqualsAndHashCode.Exclude
     private Set<Availability> availabilitySet;
 
+    private String title;
     private String description;
     private String place;
 
     private int minUsers;
     private int maxUsers;
 
-    public Event(EventConfirmation eventConfirmation, boolean isConfirmed, AppUser appUser, Set<Availability> availabilitySet, String description, String place, int minUsers, int maxUsers) {
+    public Event(EventConfirmation eventConfirmation, boolean isConfirmed, AppUser appUser, Set<Availability> availabilitySet, String description, String place, int minUsers, int maxUsers, String title) {
         this.eventConfirmation = eventConfirmation;
         this.isConfirmed = isConfirmed;
         this.appUser = appUser;
@@ -44,5 +46,6 @@ public class Event {
         this.place = place;
         this.minUsers = minUsers;
         this.maxUsers = maxUsers;
+        this.title = title;
     }
 }
