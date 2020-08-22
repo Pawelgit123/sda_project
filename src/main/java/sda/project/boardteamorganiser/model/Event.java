@@ -19,7 +19,7 @@ public class Event {
 
     @OneToOne
     private EventConfirmation eventConfirmation;
-    private boolean isConfirmed;
+    private Boolean Confirmed;
 
     @ManyToOne
     @EqualsAndHashCode.Exclude
@@ -37,9 +37,9 @@ public class Event {
     private int minUsers;
     private int maxUsers;
 
-    public Event(EventConfirmation eventConfirmation, boolean isConfirmed, AppUser appUser, Set<Availability> availabilitySet, String description, String place, int minUsers, int maxUsers, String title) {
+    public Event(EventConfirmation eventConfirmation, boolean Confirmed, AppUser appUser, Set<Availability> availabilitySet, String description, String place, int minUsers, int maxUsers, String title) {
         this.eventConfirmation = eventConfirmation;
-        this.isConfirmed = isConfirmed;
+        this.Confirmed = Confirmed;
         this.appUser = appUser;
         this.availabilitySet = availabilitySet;
         this.description = description;

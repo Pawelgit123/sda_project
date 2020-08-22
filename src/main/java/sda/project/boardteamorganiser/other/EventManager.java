@@ -13,24 +13,33 @@ public class EventManager {
 
     public void handle(String[] words) {
         if (words[1].equalsIgnoreCase("create")) {
-            makeNewEvent(words);
+            makeNewEvent();
         } else if (words[1].equalsIgnoreCase("show")) {
             printEventrList();
         }
     }
 
-    private void makeNewEvent(String[] words) {
+    private void makeNewEvent() {
+        System.out.println("Creating...: (title) (place) ");
+        Scanner scanner = new Scanner(System.in);
+        String command;
+        command = scanner.nextLine();
+        String[] words = command.split(" ");
+
         EventDao eventDao = new EventDao();
         EntityDao<Event> eventEntityDao = new EntityDao<>();
-        if (!eventDao.existsUserWithLogin(words[1])) {
+        if (!eventDao.existsUserWithLogin(words[0])) {
             Event event = Event.builder()
-                    .title(words[2])
+                    .title(words[0])
+                    .place(words[1])
                     .build();
+
+            // java.lang.NumberFormatException
 
             eventEntityDao.saveOrUpdate(event);
             System.out.println("Event created: " + event.getId());
         } else {
-            System.err.println("User cannot be saved. Login already exists.");
+            System.err.println("Event cannot be created. Event already exists.");
         }
     }
 
@@ -38,7 +47,14 @@ public class EventManager {
         EntityDao<Event> eventEntityDao = new EntityDao<>();
         eventEntityDao
                 .findAll(Event.class)
-                .forEach(System.out::println);
+                .forEach(p -> System.out.println(
+                        " [ "
+                        + p.getTitle()
+                        + " ] "
+                        + "place: "
+                        + p.getPlace()
+                ));
+        System.out.println();
     }
 
         //wymagania:

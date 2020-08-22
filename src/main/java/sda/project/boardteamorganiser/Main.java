@@ -17,6 +17,7 @@ public class Main {
         String command;
 
         do {
+            System.out.println("BoardTeamOrganiser 0.1");
             menuHelper.printOptions();
             System.out.println("Wprowadz komende: ");
             command = scanner.nextLine();

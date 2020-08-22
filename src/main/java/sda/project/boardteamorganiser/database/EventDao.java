@@ -13,7 +13,7 @@ import java.util.List;
 
 public class EventDao {
 
-    public boolean existsUserWithLogin(String searchedId) {
+    public boolean existsUserWithLogin(String searchedTitle) {
         List<Event> list = new ArrayList<>();
 
         SessionFactory sessionFactory = HibernateUtil.getOurSessionFactory();
@@ -27,7 +27,7 @@ public class EventDao {
             criteriaQuery
                     .select(rootTable) // select * from rootTable
                     .where(
-                            cb.equal(rootTable.get("id"), searchedId )
+                            cb.equal(rootTable.get("title"), searchedTitle )
                     );
 
 
