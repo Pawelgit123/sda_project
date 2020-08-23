@@ -23,7 +23,7 @@ public class Main {
         String command;
 
         do {
-            System.out.println("BoardTeamOrganiser 0.1");
+            System.out.println("\n BoardTeamOrganiser 0.2");
             menuHelper.printOptions();
             System.out.println("Wprowadz komende: ");
             command = scanner.nextLine();

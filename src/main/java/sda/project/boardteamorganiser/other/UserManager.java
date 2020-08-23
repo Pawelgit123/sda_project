@@ -3,6 +3,7 @@ package sda.project.boardteamorganiser.other;
 import sda.project.boardteamorganiser.database.AppUserDao;
 import sda.project.boardteamorganiser.database.EntityDao;
 import sda.project.boardteamorganiser.model.AppUser;
+import sda.project.boardteamorganiser.model.Availability;
 import sda.project.boardteamorganiser.model.Event;
 
 import java.util.Optional;
@@ -50,8 +51,7 @@ public class UserManager {
         EntityDao<AppUser> appUserEntityDao = new EntityDao<>();
         appUserEntityDao
                 .findAll(AppUser.class)
-                .forEach(p -> System.out.println("User: "+ p.getLogin() + " ID: " + p.getId()));
-        System.out.println();
+                .forEach(p -> System.out.println("[User:] "+ p.getLogin() + " [ID:] " + p.getId()));
     }
 
     private void userShowAvailability(){
@@ -65,8 +65,13 @@ public class UserManager {
         AppUser appUser = optionalUser.get();
 
         if(appUserDao.existsUserWithId(userId)){
-            System.out.println(appUser.getAvailabilitySet().toString());
-
+            for (Availability availability : appUser.getAvailabilitySet()) {
+                System.out.println("\n" + availability.getEvent().getTitle()
+                        +" [place:] " + availability.getEvent().getPlace()
+                        +" [myDate:] "+ availability.getDate()
+                        +" [hours:] "+ availability.getHours()
+                        +" [confirmed?] " + availability.getEvent().getConfirmed());
+            }
         } else {
             System.err.print("Niepoprawny użytkownik!");
         }
@@ -85,13 +90,11 @@ public class UserManager {
         if(appUserDao.existsUserWithId(userId)){
             Set<Event> eventSet = appUser.getEventSet();
             System.out.println();
-            System.out.println("Lista eventow dla " +appUser.getLogin() + " [Host]");
+            System.out.println("Lista eventow dla " + appUser.getLogin() + " --->Host");
             eventSet.forEach(p -> System.out.println(
                     p.getTitle()
-                    + " [place:] "
-                    + p.getPlace()
-                    + " [ID:] "
-                    + p.getId()));
+                    + " [place:] " + p.getPlace()
+                    + " [ID:] " + p.getId()));
 
             System.out.println();
 

@@ -19,7 +19,7 @@ public class Event {
 
     @OneToOne
     private EventConfirmation eventConfirmation;
-    private Boolean Confirmed;
+    private Boolean Confirmed = false;
 
     @ManyToOne
     @EqualsAndHashCode.Exclude
