@@ -22,11 +22,11 @@ public class AppUser {
 
     private Boolean active;
 
-    @OneToMany (mappedBy = "appUser")
+    @OneToMany (mappedBy = "appUser", fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     private Set<Availability> availabilitySet;
 
-    @OneToMany(mappedBy = "appUser")
+    @OneToMany(mappedBy = "appUser", fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     private Set<Event> eventSet;
 

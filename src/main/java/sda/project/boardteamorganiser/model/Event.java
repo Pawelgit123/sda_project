@@ -26,7 +26,7 @@ public class Event {
     @ToString.Exclude
     private AppUser appUser;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event",fetch = FetchType.EAGER)
     @EqualsAndHashCode.Exclude
     private Set<Availability> availabilitySet;
 

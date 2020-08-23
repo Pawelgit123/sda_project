@@ -1,5 +1,6 @@
 package sda.project.boardteamorganiser;
 
+import sda.project.boardteamorganiser.other.AvailabilityManager;
 import sda.project.boardteamorganiser.other.EventManager;
 import sda.project.boardteamorganiser.other.UserManager;
 
@@ -13,6 +14,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         UserManager userManager = new UserManager();
         EventManager eventManager = new EventManager();
+        AvailabilityManager availabilityManager = new AvailabilityManager();
         MenuHelper menuHelper = new MenuHelper();
         String command;
 
@@ -27,6 +29,8 @@ public class Main {
                 userManager.handle(words);
             }else if(words[0].equalsIgnoreCase("event")){
                 eventManager.handle(words);
+            }else if(words[0].equalsIgnoreCase("av")){
+                availabilityManager.handle(words);
             }
 
 

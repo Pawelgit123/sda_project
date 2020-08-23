@@ -1,9 +1,12 @@
 package sda.project.boardteamorganiser.other;
 
+import sda.project.boardteamorganiser.database.AppUserDao;
 import sda.project.boardteamorganiser.database.EntityDao;
 import sda.project.boardteamorganiser.database.EventDao;
+import sda.project.boardteamorganiser.model.AppUser;
 import sda.project.boardteamorganiser.model.Event;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class EventManager {
@@ -16,6 +19,8 @@ public class EventManager {
             makeNewEvent();
         } else if (words[1].equalsIgnoreCase("show")) {
             printEventrList();
+        } else if (words[1].equalsIgnoreCase("createh")){
+            makeNewEventWithHost();
         }
     }
 
@@ -41,6 +46,44 @@ public class EventManager {
         }
     }
 
+    private void makeNewEventWithHost() {
+        System.out.println("Creating...: (title) (place) ");
+        Scanner scanner = new Scanner(System.in);
+        String command;
+        command = scanner.nextLine();
+        String[] words = command.split(" ");
+        Scanner scanner1 = new Scanner(System.in);
+
+        EventDao eventDao = new EventDao();
+        EntityDao<Event> eventEntityDao = new EntityDao<>();
+        AppUserDao appUserDao = new AppUserDao();
+        EntityDao<AppUser> appUserEntityDao = new EntityDao<>();
+
+        if (!eventDao.existsEventWithTitle(words[0])) {
+            Event event = Event.builder()
+                    .title(words[0])
+                    .place(words[1])
+                    .build();
+
+            System.out.println("Podaj ID hosta:");
+            Long userId = scanner1.nextLong();
+            if (appUserDao.existsUserWithId(userId)){
+                Optional<AppUser> optionalUser = appUserEntityDao.findById(AppUser.class, userId);
+                AppUser appUser = optionalUser.get();
+                event.setAppUser(appUser);
+                appUser.getEventSet().add(event);
+                appUserEntityDao.saveOrUpdate(appUser);
+            }else {
+                System.err.println("Nie ma takiego użyztkownika! WYdarzenie bez hosta");
+            }
+
+            eventEntityDao.saveOrUpdate(event);
+            System.out.println("Event created: " + event.getId());
+        } else {
+            System.err.println("Event cannot be created. Event already exists.");
+        }
+    }
+
     private void printEventrList() {
         EntityDao<Event> eventEntityDao = new EntityDao<>();
         eventEntityDao
@@ -49,6 +92,8 @@ public class EventManager {
                         p.getTitle()
                         + " [place:] "
                         + p.getPlace()
+                        + " [ID:] "
+                        + p.getId()
                 ));
         System.out.println();
     }
