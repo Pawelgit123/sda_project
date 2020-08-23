@@ -2,12 +2,15 @@ package sda.project.boardteamorganiser;
 
 import sda.project.boardteamorganiser.other.AvailabilityManager;
 import sda.project.boardteamorganiser.other.EventManager;
+import sda.project.boardteamorganiser.other.HostManager;
 import sda.project.boardteamorganiser.other.UserManager;
 
 import java.util.Scanner;
 
 public class Main {
 
+    //dopisać hosta, po jego ID pobierz set eventó, a z seta eventów pobierz availability innych ludzi
+    // wowww
 
     public static void main(String[] args) {
         System.out.println("Initial version");
@@ -15,6 +18,7 @@ public class Main {
         UserManager userManager = new UserManager();
         EventManager eventManager = new EventManager();
         AvailabilityManager availabilityManager = new AvailabilityManager();
+        HostManager hostManager = new HostManager();
         MenuHelper menuHelper = new MenuHelper();
         String command;
 
@@ -31,6 +35,8 @@ public class Main {
                 eventManager.handle(words);
             }else if(words[0].equalsIgnoreCase("av")){
                 availabilityManager.handle(words);
+            }else if(words[0].equalsIgnoreCase("host")){
+                hostManager.handle(words);
             }
 
 

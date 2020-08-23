@@ -14,7 +14,7 @@ public class EventManager {
     public void handle(String[] words) {
         if (words[1].equalsIgnoreCase("create")) {
             makeNewEvent();
-        } else if (words[1].equalsIgnoreCase("show")) {
+        } else if (words[1].equalsIgnoreCase("list")) {
             printEventrList();
         } else if (words[1].equalsIgnoreCase("createh")){
             makeNewEventWithHost();

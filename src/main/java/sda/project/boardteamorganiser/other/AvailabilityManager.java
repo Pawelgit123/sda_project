@@ -72,17 +72,17 @@ public class AvailabilityManager {
             Event event = optionalEvent.get();
 
             Availability availability = new Availability(date, hours);
-            availabilityEntityDao.saveOrUpdate(availability);
-
-            appUser.getAvailabilitySet().add(availability);
-            appUserEntityDao.saveOrUpdate(appUser);
-
-            event.getAvailabilitySet().add(availability);
-            eventEntityDao.saveOrUpdate(event);
-
             availability.setAppUser(appUser);
             availability.setEvent(event);
             availabilityEntityDao.saveOrUpdate(availability);
+
+//            appUser.getAvailabilitySet().add(availability);
+//            appUserEntityDao.saveOrUpdate(appUser);
+//
+//            event.getAvailabilitySet().add(availability);
+//            eventEntityDao.saveOrUpdate(event);
+//
+//            availabilityEntityDao.saveOrUpdate(availability);
 
         }else {
             System.err.print("Podane błędne ID użytkownika lub spotkania");
