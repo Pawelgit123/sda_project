@@ -38,5 +38,31 @@ public class AppUserDao {
         }
         return !list.isEmpty();
     }
+
+    public boolean existsUserWithId(Long searchedId) {
+        List<AppUser> list = new ArrayList<>();
+
+        SessionFactory sessionFactory = HibernateUtil.getOurSessionFactory();
+        try (Session session = sessionFactory.openSession()) {
+
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaQuery<AppUser> criteriaQuery = cb.createQuery(AppUser.class);
+            Root<AppUser> rootTable = criteriaQuery.from(AppUser.class);
+
+
+            criteriaQuery
+                    .select(rootTable) // select * from rootTable
+                    .where(
+                            cb.equal(rootTable.get("id"), searchedId )
+                    );
+
+
+            list.addAll(session.createQuery(criteriaQuery).list());
+
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        }
+        return !list.isEmpty();
+    }
 }
 

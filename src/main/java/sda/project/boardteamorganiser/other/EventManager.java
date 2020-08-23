@@ -28,13 +28,11 @@ public class EventManager {
 
         EventDao eventDao = new EventDao();
         EntityDao<Event> eventEntityDao = new EntityDao<>();
-        if (!eventDao.existsUserWithLogin(words[0])) {
+        if (!eventDao.existsEventWithTitle(words[0])) {
             Event event = Event.builder()
                     .title(words[0])
                     .place(words[1])
                     .build();
-
-            // java.lang.NumberFormatException
 
             eventEntityDao.saveOrUpdate(event);
             System.out.println("Event created: " + event.getId());
@@ -43,15 +41,13 @@ public class EventManager {
         }
     }
 
-    public void printEventrList() {
+    private void printEventrList() {
         EntityDao<Event> eventEntityDao = new EntityDao<>();
         eventEntityDao
                 .findAll(Event.class)
                 .forEach(p -> System.out.println(
-                        " [ "
-                        + p.getTitle()
-                        + " ] "
-                        + "place: "
+                        p.getTitle()
+                        + " [place:] "
                         + p.getPlace()
                 ));
         System.out.println();

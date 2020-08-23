@@ -13,7 +13,7 @@ import java.util.List;
 
 public class EventDao {
 
-    public boolean existsUserWithLogin(String searchedTitle) {
+    public boolean existsEventWithTitle(String searchedTitle) {
         List<Event> list = new ArrayList<>();
 
         SessionFactory sessionFactory = HibernateUtil.getOurSessionFactory();
@@ -28,6 +28,32 @@ public class EventDao {
                     .select(rootTable) // select * from rootTable
                     .where(
                             cb.equal(rootTable.get("title"), searchedTitle )
+                    );
+
+
+            list.addAll(session.createQuery(criteriaQuery).list());
+
+        } catch (HibernateException he) {
+            he.printStackTrace();
+        }
+        return !list.isEmpty();
+    }
+
+    public boolean existsEventWithId(Long searchedId) {
+        List<Event> list = new ArrayList<>();
+
+        SessionFactory sessionFactory = HibernateUtil.getOurSessionFactory();
+        try (Session session = sessionFactory.openSession()) {
+
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaQuery<Event> criteriaQuery = cb.createQuery(Event.class);
+            Root<Event> rootTable = criteriaQuery.from(Event.class);
+
+
+            criteriaQuery
+                    .select(rootTable) // select * from rootTable
+                    .where(
+                            cb.equal(rootTable.get("id"), searchedId )
                     );
 
 

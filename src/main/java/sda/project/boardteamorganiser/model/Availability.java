@@ -1,13 +1,13 @@
 package sda.project.boardteamorganiser.model;
 
-import javafx.scene.chart.PieChart;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Availability {
@@ -18,7 +18,7 @@ public class Availability {
 //    private Long userId;
 //    private Long eventId;
 
-    private Date date;
+    private LocalDate date;
     private int hours;
 
     @ManyToOne
@@ -31,10 +31,8 @@ public class Availability {
     @ToString.Exclude
     private Event event;
 
-    public Availability(Date date, int hours, AppUser appUser, Event event) {
+    public Availability(LocalDate date, int hours) {
         this.date = date;
         this.hours = hours;
-        this.appUser = appUser;
-        this.event = event;
     }
 }
