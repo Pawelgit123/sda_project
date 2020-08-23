@@ -10,9 +10,6 @@ import java.util.Optional;
 import java.util.Scanner;
 
 public class EventManager {
-    private Scanner scanner = new Scanner(System.in);
-
-    //dodawanie i listowanie eventów
 
     public void handle(String[] words) {
         if (words[1].equalsIgnoreCase("create")) {
@@ -21,6 +18,8 @@ public class EventManager {
             printEventrList();
         } else if (words[1].equalsIgnoreCase("createh")){
             makeNewEventWithHost();
+        } else if (words[1].equalsIgnoreCase("detail")){
+            printDetailedEvent();
         }
     }
 
@@ -74,7 +73,7 @@ public class EventManager {
                 appUser.getEventSet().add(event);
                 appUserEntityDao.saveOrUpdate(appUser);
             }else {
-                System.err.println("Nie ma takiego użyztkownika! WYdarzenie bez hosta");
+                System.err.println("User not found. Event without host");
             }
 
             eventEntityDao.saveOrUpdate(event);
@@ -94,7 +93,29 @@ public class EventManager {
                         + p.getPlace()
                         + " [ID:] "
                         + p.getId()
+
                 ));
+        System.out.println();
+    }
+
+    private void printDetailedEvent() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Wpisz ID spotkania:");
+        Long eventId = scanner.nextLong();
+
+        EntityDao<Event> eventEntityDao = new EntityDao<>();
+        eventEntityDao
+                .findById(Event.class,eventId)
+                .ifPresent(p -> System.out.println(p.getTitle()
+                        + " [place:] "
+                        + p.getPlace()
+                        + " [ID:] "
+                        + p.getId()
+                        + " [Host:] "
+                        +p.getAppUser().getLogin()
+                ));
+
+
         System.out.println();
     }
 
